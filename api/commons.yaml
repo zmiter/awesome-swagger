@@ -1,0 +1,4 @@
+defaultMediaTypes:
+  - application/json
+fileMediaTypes:
+  - multipart/form-data

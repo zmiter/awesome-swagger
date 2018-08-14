@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui:3.17.1
+    ports:
+    - "$SWAGGER_LOCAL_PORT:8080"
+    volumes:
+    - ../api/build:/usr/share/nginx/html/build
+    depends_on:
+    - json-builder
+    environment:
+    - API_URL=/build/latest.json
+    restart: always
+
+  json-builder:
+    build: nodejs
+    environment:
+    - SWAGGER_API_HOST
+    - SWAGGER_API_PORT
+    - SWAGGER_API_BASE_PATH
+    - SWAGGER_API_SCHEME
+    volumes:
+    - ../:/var/www/html
